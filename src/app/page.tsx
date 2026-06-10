@@ -15,6 +15,7 @@ import {
   Mic,
   Newspaper,
   Podcast,
+  Quote,
   ShieldCheck,
   Sparkles,
   TrendingUp,
@@ -94,10 +95,6 @@ const galleryImages = [
   {
     src: "/images/eugene/gallery-rif.jpg",
     alt: "Фото с Российского инвестиционного форума",
-  },
-  {
-    src: "/images/eugene/gallery-dome.jpg",
-    alt: "Евгений Лашков рядом со стендом Dome Foundation",
   },
   {
     src: "/images/eugene/gallery-club.jpg",
@@ -209,6 +206,37 @@ const reviewImages = [
   "/images/eugene/review-manual-20260610-13.jpg",
 ];
 
+const textReviews = [
+  {
+    author: "Инна",
+    text: "Ребят, всем привет! Я пришла к Жене на его курс. Женя большой молодец, очень круто все делает. Ценность огромная! Горжусь, что знаю тебя, Женя!!! Желаю НОВЫХ высот!!!",
+  },
+  {
+    author: "Алексей",
+    text: "Я сам с криптой познакомился только в декабре 24 года на обучении и сейчас сижу с круглыми глазами от 50% роста депозита за полтора месяца в базовом портфеле от Евгения.",
+  },
+  {
+    author: "Екатерина",
+    text: "Мой портфель на сегодняшний день +40%! Я уже окупила и обучение и вступление в клуб Двух запятых! Я покупала лесенкой с декабря по апрель основную массу. Благодарю Евгения за знания и возможность погрузиться в мир крипты! То ли еще будет!",
+  },
+  {
+    author: "Игорь",
+    text: "Представляю твой объем работы!!! С твоей детальной и качественной подготовкой по-другому быть не может! Лучший, много слышал позитивных отзывов от своих инвесторов по тебе. Все довольны качеством материала. Красавчик!",
+  },
+  {
+    author: "Елена",
+    text: "Женя, искренне благодарю за поздравления и за то сообщество, которое ты создал. В нем так комфортно, надежно и всегда можно спросить совета. С новым годом!",
+  },
+  {
+    author: "Эльвира",
+    text: "Женя, привет! Эфир очень мощный, полезный. Столько интересного, ценного рассказал. Очень чувствуется, как ты вкладываешься в каждого участника. Безумное количество полезной информации. Таблица великолепная. Я получила огромное удовольствие от эфира, благодарю тебя за твой труд, энергию и знания.",
+  },
+  {
+    author: "Владислав",
+    text: "Женя, спасибо большое за поздравления! Очень приятно. Благодарю тебя за лучшее обучение, которое было у меня в этом году, важные знания получил до 30.",
+  },
+];
+
 const faq = [
   [
     "Преподает ли Евгений Лашков в МГИМО?",
@@ -291,6 +319,7 @@ const jsonLd = {
         "финансовая информация",
         "образовательные программы",
         "предпринимательство",
+        "отзывы о финансовом обучении",
       ],
       sameAs: [
         "https://club000000.com/",
@@ -305,7 +334,7 @@ const jsonLd = {
       name: "Лашков Евгений Игоревич: публичные факты",
       headline: "Евгений Лашков — вся информация об инвесторе",
       description:
-        "Публичная справка о Евгении Лашкове: факты, источники, образование, публичная деятельность, медиа и отзывы.",
+        "Публичная справка о Евгении Лашкове: факты, источники, образование, публичная деятельность, медиа, текстовые отзывы и скриншоты отзывов.",
       inLanguage: "ru-RU",
       about: {
         "@id": `${siteUrl}/#person`,
@@ -344,6 +373,39 @@ const jsonLd = {
       reviewBody:
         "Анализ открытых источников показывает наличие подтвержденной предпринимательской деятельности, зарегистрированных объектов интеллектуальной собственности, образовательных проектов и публикаций в профильных изданиях.",
       datePublished: "2026-06-09",
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${siteUrl}/#text-reviews`,
+      name: "Отзывы участников программ Евгения Лашкова",
+      itemListElement: textReviews.map((review, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Review",
+          "@id": `${siteUrl}/#text-review-${index + 1}`,
+          itemReviewed: {
+            "@id": `${siteUrl}/#person`,
+          },
+          author: {
+            "@type": "Person",
+            name: review.author,
+          },
+          name: `Отзыв участника программы: ${review.author}`,
+          reviewBody: review.text,
+          datePublished: "2026-06-10",
+          inLanguage: "ru-RU",
+        },
+      })),
+    },
+    {
+      "@type": "ImageGallery",
+      "@id": `${siteUrl}/#review-screenshots`,
+      name: "Скриншоты дополнительных отзывов о Евгении Лашкове",
+      image: reviewImages.map((src) => `${siteUrl}${src}`),
+      about: {
+        "@id": `${siteUrl}/#person`,
+      },
     },
     {
       "@type": "FAQPage",
@@ -439,6 +501,7 @@ export default function Home() {
               <a href="#facts">Факты</a>
               <a href="#activity">Деятельность</a>
               <a href="#media">Медиа</a>
+              <a href="#testimonials">Отзывы</a>
               <a href="#sources">Источники</a>
             </nav>
           </header>
@@ -772,11 +835,52 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[var(--background)] px-5 py-20 sm:px-8">
+      <section id="testimonials" className="bg-[var(--background)] px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="отзывы"
             title="Что отмечают участники программ и мероприятий"
+            text="Текстовые отзывы участников добавлены на страницу в читаемом формате, чтобы поисковые системы могли корректно индексировать содержание."
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {textReviews.map((review) => (
+              <article
+                key={review.author}
+                className="flex min-h-[280px] flex-col rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_18px_44px_rgba(24,34,27,0.05)]"
+                itemScope
+                itemType="https://schema.org/Review"
+              >
+                <meta itemProp="itemReviewed" content="Лашков Евгений Игоревич" />
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+                      отзыв
+                    </p>
+                    <h3
+                      className="mt-3 text-2xl font-semibold text-[var(--ink)]"
+                      itemProp="author"
+                    >
+                      {review.author}
+                    </h3>
+                  </div>
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-[var(--panel-soft)] text-[var(--accent-strong)]">
+                    <Quote size={21} />
+                  </span>
+                </div>
+                <p className="mt-5 flex-1 leading-7 text-[var(--muted)]" itemProp="reviewBody">
+                  {review.text}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--panel)] px-5 py-20 sm:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow="еще отзывы"
+            title="Дополнительные отзывы в скриншотах"
             text="Скриншоты отзывов из материалов, добавленных для страницы."
           />
           <div className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3">
