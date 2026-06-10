@@ -647,7 +647,6 @@ export default function Home() {
             <SectionHeading
               eyebrow="галерея"
               title="Фото с мероприятий и публичных выступлений"
-              text="Подборка фотографий из материалов, добавленных для страницы."
               light
             />
             <div className="inline-flex items-center gap-2 rounded-md border border-white/13 bg-white/[0.04] px-4 py-3 text-sm text-white/72">
