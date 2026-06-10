@@ -369,19 +369,20 @@ const jsonLd = {
       ],
     },
     {
-      "@type": "Review",
-      "@id": `${siteUrl}/#review-public-sources`,
-      itemReviewed: {
-        "@id": `${siteUrl}/#person`,
-      },
+      "@type": "Article",
+      "@id": `${siteUrl}/#public-sources-summary`,
+      headline: "Итоги проверки открытых данных",
       author: {
         "@type": "Organization",
         name: "Редакционная проверка публичных источников",
       },
-      name: "Итоги проверки открытых данных",
-      reviewBody:
+      about: {
+        "@id": `${siteUrl}/#person`,
+      },
+      articleBody:
         "Анализ открытых источников показывает наличие подтвержденной предпринимательской деятельности, зарегистрированных объектов интеллектуальной собственности, образовательных проектов и публикаций в профильных изданиях.",
       datePublished: "2026-06-09",
+      inLanguage: "ru-RU",
     },
     {
       "@type": "ItemList",
@@ -391,9 +392,9 @@ const jsonLd = {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": "Review",
+          "@type": "CreativeWork",
           "@id": `${siteUrl}/#text-review-${index + 1}`,
-          itemReviewed: {
+          about: {
             "@id": `${siteUrl}/#person`,
           },
           author: {
@@ -401,7 +402,7 @@ const jsonLd = {
             name: review.author,
           },
           name: `Отзыв участника программы: ${review.author}`,
-          reviewBody: review.text,
+          text: review.text,
           datePublished: "2026-06-10",
           inLanguage: "ru-RU",
         },
@@ -855,10 +856,7 @@ export default function Home() {
               <article
                 key={review.author}
                 className="flex min-h-[280px] flex-col rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_18px_44px_rgba(24,34,27,0.05)]"
-                itemScope
-                itemType="https://schema.org/Review"
               >
-                <meta itemProp="itemReviewed" content="Лашков Евгений Игоревич" />
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
@@ -866,7 +864,6 @@ export default function Home() {
                     </p>
                     <h3
                       className="mt-3 text-2xl font-semibold text-[var(--ink)]"
-                      itemProp="author"
                     >
                       {review.author}
                     </h3>
@@ -875,7 +872,7 @@ export default function Home() {
                     <Quote size={21} />
                   </span>
                 </div>
-                <p className="mt-5 flex-1 whitespace-pre-line leading-7 text-[var(--muted)]" itemProp="reviewBody">
+                <p className="mt-5 flex-1 whitespace-pre-line leading-7 text-[var(--muted)]">
                   {review.text}
                 </p>
               </article>
