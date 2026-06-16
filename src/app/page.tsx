@@ -877,6 +877,14 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <div className="mt-10 flex justify-center">
+            <a
+              href="https://evgenylashkov-reviews.vercel.app"
+              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[var(--accent-strong)] px-6 text-sm font-semibold text-white transition hover:bg-[var(--accent)]"
+            >
+              Все отзывы
+            </a>
+          </div>
         </div>
       </section>
 
