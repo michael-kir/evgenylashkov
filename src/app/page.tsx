@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://evgenylashkov.vercel.app";
+  "https://www.evgeny-lashkov.ru";
 
 const facts = [
   {
@@ -879,7 +879,7 @@ export default function Home() {
           </div>
           <div className="mt-10 flex justify-center">
             <a
-              href="https://evgenylashkov-reviews.vercel.app"
+              href="https://www.reviews-lashkov.ru"
               className="inline-flex min-h-12 items-center justify-center rounded-md bg-[var(--accent-strong)] px-6 text-sm font-semibold text-white transition hover:bg-[var(--accent)]"
             >
               Все отзывы

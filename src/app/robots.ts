@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://evgenylashkov.vercel.app";
+const siteUrl =
+    "https://www.evgeny-lashkov.ru";
 
   return {
     rules: {
